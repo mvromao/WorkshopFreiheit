@@ -60,6 +60,10 @@ jobs:
         run: |
           gcloud auth configure-docker --quiet
           gcloud auth configure-docker europe-west3-docker.pkg.dev --quiet
+          export VERSION=$(cat app-version)
+          IMAGE = europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_ARTIFACT_REGISTRY }}/flutter-app-runner-group-${{ vars.GROUP_NUMBER }}:v$VERSION
+          docker build -t $IMAGE .
+          docker push $IMAGE
           # Build docker image
       
       # Step 7: Deploy the containerized app to Google Cloud Run
