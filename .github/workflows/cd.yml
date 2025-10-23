@@ -69,4 +69,8 @@ jobs:
       # - Cloud Run automatically handles scaling, HTTPS, and load balancing
       - name: Deploy to Cloud Run ☁️
         run: |
+            gcloud run deploy flutter-workshop-group-${{ vars.GROUP_NUMBER }} \
+            --image europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_ARTIFACT_REGISTRY }}/flutter-app-runner-group-${{ vars.GROUP_NUMBER }}:v$VERSION \
+            --region us-central1 \
+            --allow-unauthenticated
           # Deploy to cloud run
